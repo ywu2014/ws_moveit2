@@ -1,6 +1,8 @@
 import rclpy
 from rclpy.node import Node
 from visualization_msgs.msg import Marker
+from geometry_msgs.msg import TransformStamped
+from tf2_ros import TransformBroadcaster
 
 class MarkerTest(Node):
     def __init__(self):
@@ -11,7 +13,8 @@ class MarkerTest(Node):
         self.marker_topic = self.get_parameter('marker_topic').value
 
         self.publisher_ = self.create_publisher(Marker, self.marker_topic, 10)
-        
+        # 创建 TF 广播器
+        self.tf_broadcaster = TransformBroadcaster(self)
         self.timer = self.create_timer(1.0, self.publish_marker) # 每秒发布一次
 
     def publish_marker(self):
@@ -48,6 +51,24 @@ class MarkerTest(Node):
         marker.lifetime.sec = lifetime_sec
         
         self.publisher_.publish(marker)
+
+        t = TransformStamped()
+        t.header.stamp = self.get_clock().now().to_msg()
+        t.header.frame_id = 'world'
+        t.child_frame_id = 'sphere_frame_1'
+        
+        # Translation
+        t.transform.translation.x = 0.34305
+        t.transform.translation.y = -0.04185
+        t.transform.translation.z = 0.44799
+        
+        # Rotation
+        t.transform.rotation.x = 0.98064
+        t.transform.rotation.y = -0.01348
+        t.transform.rotation.z = 0.19523
+        t.transform.rotation.w = 0.00661
+        
+        self.tf_broadcaster.sendTransform(t)
 
 def main(args=None):
     rclpy.init(args=args)
