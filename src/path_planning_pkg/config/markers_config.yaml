@@ -1,0 +1,30 @@
+markers:
+  - name: "target_sphere_1"
+    frame_id: "world"
+    ns: "custom_markers"
+    id: 0
+    type: 2  # CUBE=1, SPHERE=2, CYLINDER=3
+    action: 0 # ADD=0, MODIFY=0, DELETE=2
+    pose:
+      position: {x: 0.34305, y: -0.04185, z: 0.44799}
+      # orientation: {x: 0.98064, y: -0.01348, z: 0.19523, w: 0.00661}
+      # 0.93184289 -0.01442306  0.36255128  0.00416881
+      orientation: {x: 0.93184289, y: -0.01442306, z: 0.36255128, w: 0.00416881}
+    scale: {x: 0.05, y: 0.05, z: 0.05}
+    color: {r: 1.0, g: 0.0, b: 0.0, a: 1.0}
+    lifetime_sec: 0
+    publish_tf: true
+    tf_frame_name: "sphere_frame_1"
+  - name: "target_cube_1"
+    frame_id: "world"
+    ns: "custom_markers"
+    id: 1
+    type: 1  # CUBE=1, SPHERE=2, CYLINDER=3
+    action: 0 # ADD=0, MODIFY=0, DELETE=2
+    pose:
+      position: {x: 0.25305, y: 0.10185, z: 0.44799}
+      orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}
+    scale: {x: 0.05, y: 0.05, z: 0.05}
+    color: {r: 1.0, g: 0.0, b: 0.0, a: 1.0}
+    lifetime_sec: 0
+    publish_tf: false # 不发布坐标转换

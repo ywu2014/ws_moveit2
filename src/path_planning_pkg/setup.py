@@ -26,6 +26,7 @@ setup(
             'path_planning_action = path_planning_pkg.path_planning_action:main',
             'path_planning_moveitpy = path_planning_pkg.path_planning_moveitpy:main',
             'marker_test = path_planning_pkg.marker_test:main',
+            'marker_publish = path_planning_pkg.marker_publish:main',
         ],
     },
 )
