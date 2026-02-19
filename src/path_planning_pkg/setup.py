@@ -29,6 +29,7 @@ setup(
             'marker_test = path_planning_pkg.marker_test:main',
             'marker_publish = path_planning_pkg.marker_publish:main',
             'scene_object_test = path_planning_pkg.scene_object_test:main',
+            'scene_object_publish = path_planning_pkg.scene_object_publish:main',
         ],
     },
 )

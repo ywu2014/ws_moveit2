@@ -1,0 +1,33 @@
+# 要添加的物体列表
+objects_to_add:
+  - name: "box_0"
+    type: "box"
+    size: [0.1, 0.1, 0.05]
+    pose:
+      position: {x: 0.1, y: 0.1, z: 0.1}
+      orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}
+    color: [1.0, 0.0, 0.0, 1.0]
+    frame_id: "world"
+
+  - name: "cyl_0"
+    type: "cylinder"
+    height: 0.1
+    radius: 0.05
+    pose:
+      position: {x: 0.1, y: -0.2, z: 0.2}
+      orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}
+    color: [0.0, 1.0, 0.0, 1.0]
+    frame_id: "world"
+
+  - name: "table"
+    type: "mesh"
+    mesh_file: "table.stl"
+    scale: [1.0, 1.0, 1.0]
+    pose:
+      position: {x: -0.5, y: 0.5, z: 0.6}
+      orientation: {x: 0.0, y: 0.0, z: 0.0, w: 1.0}
+    frame_id: "world"
+
+# 要删除的物体列表
+objects_to_remove:
+  - "box_0"
