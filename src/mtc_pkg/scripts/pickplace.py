@@ -5,7 +5,8 @@ import rclcpp
 from moveit.task_constructor import core, stages
 # from moveit_commander import PlanningSceneInterface
 from geometry_msgs.msg import PoseStamped, TwistStamped
-from moveit_msgs.msg import Constraints, OrientationConstraint
+from moveit_msgs.msg import Constraints, OrientationConstraint, CollisionObject
+from shape_msgs.msg import SolidPrimitive
 import math, time
 
 rclcpp.init()
@@ -21,6 +22,7 @@ eef = "hand"
 # Specify object parameters
 object_name = "object"
 object_radius = 0.02
+object_dimensions = [0.1, 0.05, 0.03] # Box size: x, y, z
 
 # Start with a clear planning scene
 # psi = PlanningSceneInterface(synchronous=True)
@@ -51,6 +53,24 @@ task.loadRobotModel(node)
 # Start with the current state
 task.add(stages.CurrentState("current"))
 
+# ========== 修改部分：使用 ApplyPlanningScene 添加物体 ==========
+object = CollisionObject()
+object.header.frame_id = "world"
+object.id = object_name
+box = SolidPrimitive()
+box.type = SolidPrimitive.BOX
+box.dimensions = object_dimensions
+
+object.primitives.append(box)
+object.primitive_poses.append(objectPose.pose)
+object.operation = object.ADD
+
+modifyPlanningScene = stages.ModifyPlanningScene("modify planning scene")
+modifyPlanningScene.addObject(object)
+task.add(modifyPlanningScene)
+# [initAndConfigModifyPlanningScene]
+# ===========================================================
+
 # [initAndConfigConnect]
 # Create a planner instance that is used to connect
 # the current state to the grasp approach pose
@@ -70,7 +90,8 @@ grasp_generator = stages.GenerateGraspPose("Generate Grasp Pose")
 grasp_generator.angle_delta = math.pi / 2
 grasp_generator.pregrasp = "open"
 grasp_generator.grasp = "close"
-grasp_generator.setMonitoredStage(task["current"])  # Generate solutions for all initial states
+# grasp_generator.setMonitoredStage(task["current"])  # Generate solutions for all initial states
+grasp_generator.setMonitoredStage(task["modify planning scene"])  # Generate solutions for all initial states
 # [initAndConfigGenerateGraspPose]
 # [pickAndPlaceTut5]
 
@@ -186,7 +207,11 @@ task.add(place)
 # [pickAndPlaceTut12]
 
 # [pickAndPlaceTut13]
-if task.plan():
+res_code = task.plan()
+print(f'res_code: {res_code.val}')
+# print(dir(res))
+if res_code:
+    print('-'*30)
     task.publish(task.solutions[0])
 
 # avoid ClassLoader warning
@@ -195,4 +220,4 @@ del planners
 # [pickAndPlaceTut13]
 
 # Prevent the program from exiting, giving you the opportunity to inspect solutions in rviz
-time.sleep(3600)
+time.sleep(2)
