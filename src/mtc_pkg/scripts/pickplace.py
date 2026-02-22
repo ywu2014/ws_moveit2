@@ -76,8 +76,14 @@ task.add(modifyPlanningScene)
 # the current state to the grasp approach pose
 # pipeline = core.PipelinePlanner(node, "ompl", "RRTConnectkConfigDefault")
 pipeline = core.PipelinePlanner(node, "ompl")
+pipeline.max_velocity_scaling_factor = 0.5
+pipeline.max_acceleration_scaling_factor = 0.5
 # pipeline.setProperty("max_planning_time", 5.0)
-planners = [(arm, pipeline)]
+
+# 2. 关节插补器 (用于手爪)
+gripper_planner = core.JointInterpolationPlanner()
+
+planners = [(arm, pipeline), (eef, gripper_planner)]
 
 # Connect the two stages
 task.add(stages.Connect("connect", planners))
