@@ -76,6 +76,7 @@ task.add(modifyPlanningScene)
 # the current state to the grasp approach pose
 # pipeline = core.PipelinePlanner(node, "ompl", "RRTConnectkConfigDefault")
 pipeline = core.PipelinePlanner(node, "ompl")
+# pipeline.setProperty("max_planning_time", 5.0)
 planners = [(arm, pipeline)]
 
 # Connect the two stages
@@ -136,11 +137,13 @@ task.add(pick)
 # [initAndConfigPick]
 # [pickAndPlaceTut8]
 
+"""
 # Define orientation constraint to keep the object upright
 oc = OrientationConstraint()
 oc.parameterization = oc.ROTATION_VECTOR
 oc.header.frame_id = "world"
-oc.link_name = "object"
+# oc.link_name = "object"
+oc.link_name = "panda_link8" 
 oc.orientation.w = 1.0
 oc.absolute_x_axis_tolerance = 0.1
 oc.absolute_y_axis_tolerance = 0.1
@@ -150,11 +153,12 @@ oc.weight = 1.0
 constraints = Constraints()
 constraints.name = "object:upright"
 constraints.orientation_constraints.append(oc)
+"""
 
 # [pickAndPlaceTut9]
 # Connect the Pick stage with the following Place stage
 con = stages.Connect("connect", planners)
-con.path_constraints = constraints
+# con.path_constraints = constraints
 task.add(con)
 # [pickAndPlaceTut9]
 
