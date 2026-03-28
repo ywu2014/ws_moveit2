@@ -230,8 +230,8 @@ class PathPlanningActionNode(Node):
         cartesian_path_request.max_step = cartesian_conf.get('max_step', 0.01)
         cartesian_path_request.jump_threshold = cartesian_conf.get('jump_threshold', 0.0)
         cartesian_path_request.avoid_collisions = cartesian_conf.get('avoid_collisions', True)
-        # cartesian_path_request.max_velocity_scaling_factor = self.max_velocity_scaling_factor
-        # cartesian_path_request.max_acceleration_scaling_factor = self.max_acceleration_scaling_factor
+        cartesian_path_request.max_velocity_scaling_factor = self.max_velocity_scaling_factor
+        cartesian_path_request.max_acceleration_scaling_factor = self.max_acceleration_scaling_factor
 
         return cartesian_path_request
 
