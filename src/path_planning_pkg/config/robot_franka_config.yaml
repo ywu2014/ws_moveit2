@@ -1,0 +1,17 @@
+planning_groups:  # 规划组, 每个组对应一个机械臂
+  - name: arm
+    type: arm
+    joints: [panda_joint1, panda_joint2, panda_joint3, panda_joint4, panda_joint5, panda_joint6, panda_joint7]
+    states:
+      - name: home
+        value: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      - name: ready
+        value: [-0.4322, 0.1266, -0.2081, -0.2044, -0.3682, 1.0656, 0.4642]
+  - name: hand
+    type: gripper
+    joints: [panda_finger_joint1]
+    states: 
+      - name: open
+        value: [0.04]
+      - name: close
+        value: [0.0]
