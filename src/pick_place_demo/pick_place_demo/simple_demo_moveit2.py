@@ -38,9 +38,6 @@ class SimpleMoveit2Demo(Node, BaseViewer):
             callback_group=self.parallel_group
         )
 
-        # 设置定时器
-        self.timer = self.create_timer(0.01, self.timer_callback)
-
         # 定义关节名称列表
         self.arm_joint_names = [f"joint{i}" for i in range(1, 8)]
         self.gripper_joint_names = ["finger_joint1", "finger_joint2"]
@@ -50,9 +47,10 @@ class SimpleMoveit2Demo(Node, BaseViewer):
         # 初始化目标位置队列 (用于平滑控制)
         # 注意：self.data.qpos 的长度是 nq (自由度)
         # 创建一个与 qpos 长度相同的数组来存储目标
-        self.target_qpos = np.zeros(self.model.nq)
+        self.target_qpos = np.zeros(9)
         # 初始化目标为当前位置
-        self.target_qpos[:] = self.data.qpos[:]
+        self.target_qpos[:] = self.data.qpos[:9]
+        self.start()
 
 
     def step_callback(self):
@@ -91,6 +89,7 @@ def main(args=None):
     try:
         executor.spin()
     finally:
+        node.stop()
         executor.shutdown()
         node.destroy_node()
         rclpy.shutdown()

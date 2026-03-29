@@ -4,6 +4,7 @@ import mujoco.viewer
 import glfw
 import cv2
 import numpy as np
+import threading
 
 class BaseViewer:
     def __init__(self, model_path, sleep_time:float=None):
@@ -22,7 +23,7 @@ class BaseViewer:
         self.mujoco_handle = None
 
         # 每个step运行等待时间
-        self.sleep_time = None
+        self.sleep_time = sleep_time
 
         self.init_viewer()
 
@@ -30,7 +31,15 @@ class BaseViewer:
         """
         模拟器是否还在运行
         """
-        return self.mujoco_handle.is_running()
+        return self._is_running and self.mujoco_handle.is_running()
+    
+    def stop(self):
+        """
+        停止 Viewer 线程
+        """
+        self._is_running = False
+        if self._viewer_thread and self._viewer_thread.is_alive():
+            self._viewer_thread.join(timeout=1.0)
 
     def sync(self):
         """
@@ -67,11 +76,24 @@ class BaseViewer:
         """
         起动 MuJoCo 模型的主循环
         """
+        self._is_running = True
         # self.init_viewer()
 
         # 前置处理, 循环前的一些自定义初始化工作
         self.pre_process()
 
+        # while self.is_running():
+        #     self.step()
+
+        # 创建并启动 viewer 线程
+        self._viewer_thread = threading.Thread(target=self._run_viewer_thread)
+        self._viewer_thread.daemon = True # 设置为守护线程，主程序退出时它也会自动退出
+        self._viewer_thread.start()
+
+    def _run_viewer_thread(self):
+        """
+        内部方法：在独立线程中运行 Viewer 循环
+        """
         while self.is_running():
             self.step()
 
