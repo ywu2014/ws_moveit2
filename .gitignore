@@ -136,3 +136,5 @@ src/moveit_resources/
 src/moveit_msgs/
 src/moveit2
 src/moveit_task_constructor
+.vscode/
+MUJOCO_LOG.TXT

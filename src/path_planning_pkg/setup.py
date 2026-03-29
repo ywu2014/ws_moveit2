@@ -31,6 +31,7 @@ setup(
             'scene_object_test = path_planning_pkg.scene_object_test:main',
             'scene_object_publish = path_planning_pkg.scene_object_publish:main',
             'path_planning_action_v2 = path_planning_pkg.path_planning_action_v2:main',
+            'path_planning_moveitpy_v2 = path_planning_pkg.path_planning_moveitpy_v2:main',
         ],
     },
 )
