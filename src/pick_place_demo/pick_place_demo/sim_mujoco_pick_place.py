@@ -8,7 +8,7 @@ import numpy as np
 import glfw
 from .mujoco_viewer import BaseViewer
 
-class SimpleMoveit2Demo(Node, BaseViewer):
+class PickPlaceSim(Node, BaseViewer):
     """
     环境仿真
     """
@@ -85,7 +85,7 @@ class SimpleMoveit2Demo(Node, BaseViewer):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SimpleMoveit2Demo()
+    node = PickPlaceSim()
 
     executor = MultiThreadedExecutor(num_threads=4)
     executor.add_node(node)

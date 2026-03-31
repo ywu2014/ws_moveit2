@@ -55,7 +55,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'simple_demo_moveit2 = pick_place_demo.simple_demo_moveit2:main',
+            'sim_mujoco_pick_place = pick_place_demo.sim_mujoco_pick_place:main',
         ],
     },
 )
