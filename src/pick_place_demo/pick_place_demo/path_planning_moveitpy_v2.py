@@ -33,7 +33,7 @@ class PathPlanning(Node):
         self.declare_parameter('robot_config_file_name', 'robot_config.yaml')
         self.robot_config_file_name = self.get_parameter('robot_config_file_name').value
         
-        package_share_directory = get_package_share_directory('path_planning_pkg')
+        package_share_directory = get_package_share_directory('pick_place_demo')
         self.mesh_root_path = f"{package_share_directory}/meshes"
 
         self.declare_parameter('max_velocity_scaling_factor', 0.1)

@@ -56,6 +56,7 @@ setup(
     entry_points={
         'console_scripts': [
             'sim_mujoco_pick_place = pick_place_demo.sim_mujoco_pick_place:main',
+            'path_planning = pick_place_demo.path_planning_moveitpy_v2:main',
         ],
     },
 )
