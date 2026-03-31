@@ -45,8 +45,6 @@ class SimpleMoveit2Demo(Node, BaseViewer):
         self.joint_ids = {name: self.get_joint_id(name) for name in self.all_joint_names}
         
         # 初始化目标位置队列 (用于平滑控制)
-        # 注意：self.data.qpos 的长度是 nq (自由度)
-        # 创建一个与 qpos 长度相同的数组来存储目标
         self.target_qpos = np.zeros(9)
         # 初始化目标为当前位置
         self.target_qpos[:] = self.data.qpos[:9]
@@ -67,13 +65,19 @@ class SimpleMoveit2Demo(Node, BaseViewer):
             # 检查是否是我们关心的关节
             joint_name = ros_name.replace('panda_', '')
             if joint_name in self.all_joint_names:
-                # 获取该关节在 MuJoCo 模型中的 ID
-                # mj_id = self.get_joint_id(joint_name)
-                mj_id = self.joint_ids[joint_name]
-                
-                if mj_id != -1:
-                    # 更新目标位置
-                    self.target_qpos[mj_id] = ros_pos
+                self.update_target_qpos(joint_name, ros_pos)
+                if joint_name == 'finger_joint1':
+                    self.update_target_qpos('finger_joint2', ros_pos)
+
+    def update_target_qpos(self, joint_name, value):
+        # 获取该关节在 MuJoCo 模型中的 ID
+        # mj_id = self.get_joint_id(joint_name)
+        mj_id = self.joint_ids[joint_name]
+        
+        if mj_id != -1:
+            # 更新目标位置
+            self.target_qpos[mj_id] = value
+
 
     def timer_callback(self):
         # 进行动力学模拟
