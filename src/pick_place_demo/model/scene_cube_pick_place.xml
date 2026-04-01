@@ -19,19 +19,13 @@
     <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
     <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
 
-    <!-- 2. 方块刚体 -->
+    <!-- 方块刚体 -->
     <body name="box_body" pos="0.5 0.0 0.02">
       <freejoint name="cube_joint"/>
-      <!-- 惯性属性：定义质量和转动惯量 -->
-      <!-- fullinertia="ixx iyy izz ixy ixz iyz" -->
-      <!-- <inertial pos="0 0 0" mass="0.2" diaginertia="0.1 0.1 0.1"/> -->
 
       <!-- 几何形状：定义外观和碰撞形状 -->
       <!-- size="x半长 y半长 z半长" -->
-      <geom name="box_geom" type="box" size="0.02 0.02 0.02" rgba="1 0 0 1" condim="4" friction="1.0 0.005 0.0001"/>
-
-      <!-- 自由关节：允许方块在空间中自由移动和旋转 -->
-      <!-- <joint name="box_joint" type="free"/> -->
+      <geom name="box_geom" type="box" size="0.02 0.02 0.02" rgba="1 0 0 1" condim="4" friction="2.0 0.115 0.0001"/>
     </body>
   </worldbody>
 </mujoco>

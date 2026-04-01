@@ -52,8 +52,10 @@ class PickPlaceSim(Node, BaseViewer):
 
 
     def step_callback(self):
-        for i, v in enumerate(self.target_qpos):
-            self.data.qpos[i] = v
+        # for i, v in enumerate(self.target_qpos):
+        #     self.data.qpos[i] = v
+        self.data.ctrl[:7] = self.target_qpos[:7]
+        self.data.ctrl[7] = self.target_qpos[7]
 
     def joint_state_callback(self, msg: JointState):
         """
@@ -65,9 +67,24 @@ class PickPlaceSim(Node, BaseViewer):
             # 检查是否是我们关心的关节
             joint_name = ros_name.replace('panda_', '')
             if joint_name in self.all_joint_names:
-                self.update_target_qpos(joint_name, ros_pos)
                 if joint_name == 'finger_joint1':
-                    self.update_target_qpos('finger_joint2', ros_pos)
+                    # 夹爪
+                    torque = self.gripper_joint_to_torque(ros_pos)
+                    self.update_target_qpos('finger_joint1', torque)
+                    self.update_target_qpos('finger_joint2', torque)
+                else:
+                    # 手臂
+                    self.update_target_qpos(joint_name, ros_pos)
+
+    def gripper_joint_to_torque(self, joint_value):
+        torque = None
+        if joint_value > 0.03:
+            # for open
+            torque = 200
+        else:
+            # for close
+            torque = 0
+        return torque
 
     def update_target_qpos(self, joint_name, value):
         # 获取该关节在 MuJoCo 模型中的 ID

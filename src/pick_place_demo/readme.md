@@ -1,12 +1,23 @@
+# cube pick place demo
 ## 启动节点
-## 仿真启动
+### moveit节点
+```bash
+ros2 launch panda_moveit_config demo.launch.py
+```
+
+### 路径规划启动
+```bash
+ros2 run pick_place_demo path_planning --ros-args -p robot_config_file_name:=robot_franka_config.yaml
+```
+
+### 仿真启动
 ```bash
 ros2 run pick_place_demo sim_mujoco_pick_place --ros-args -p mjcf_name:=scene_cube_pick_place.xml
 ```
 
-## 路径规划启动
+### 一次性启动
 ```bash
-ros2 run pick_place_demo path_planning --ros-args -p robot_config_file_name:=robot_franka_config.yaml
+ros2 launch pick_place_demo simple_cube_pick_place.launch.py
 ```
 
 ## 测试流程
