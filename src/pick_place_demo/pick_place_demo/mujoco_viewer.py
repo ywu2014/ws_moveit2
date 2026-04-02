@@ -64,6 +64,24 @@ class BaseViewer:
         """
         return self._get_obj_id(mujoco.mjtObj.mjOBJ_BODY, name)
     
+    def get_obj_pose(self, obj_type, obj_name:str):
+        """
+        获取物体位姿
+        :param obj_type: 物体类型
+        :param obj_name: 物体名称
+        :return position(xyz), quat(wxyz)
+        """
+        obj_id = self._get_obj_id(obj_type, obj_name)
+        return self.data.xpos[obj_id], self.data.xquat[obj_id]
+    
+    def get_body_pose(self, obj_name:str):
+        """
+        获取body类型物体位姿
+        :param obj_name: 物体名称
+        :return position(xyz), quat(wxyz)
+        """
+        return self.get_obj_pose(mujoco.mjtObj.mjOBJ_BODY, obj_name)
+    
     def get_joint_id(self, name:str):
         """
         获取joint的运行时id
