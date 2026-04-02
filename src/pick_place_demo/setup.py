@@ -57,6 +57,7 @@ setup(
         'console_scripts': [
             'sim_mujoco_pick_place = pick_place_demo.sim_mujoco_pick_place:main',
             'path_planning = pick_place_demo.path_planning_moveitpy_v2:main',
+            'static_tf_publish = pick_place_demo.static_tf_publish:main',
         ],
     },
 )
