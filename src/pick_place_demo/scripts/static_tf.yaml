@@ -2,21 +2,21 @@ tfs:
 - child_frame_id: pre_grasp_pt_1
   frame_id: track_link
   rotation:
-    w: 1.0
-    x: -0.0
-    y: -0.0
-    z: -0.0
+    w: 0.0
+    x: 0.7071067811865476
+    y: 0.7071067811865476
+    z: 0.0
   translation:
     x: 0.0048330000000000005
     y: 0.0
-    z: 0.02
+    z: 0.05
 - child_frame_id: grasp_pt_1
   frame_id: track_link
   rotation:
-    w: 1.0
-    x: -0.0
-    y: -0.0
-    z: -0.0
+    w: 0.0
+    x: 0.7071067811865476
+    y: 0.7071067811865476
+    z: 0.0
   translation:
     x: 0.0048330000000000005
     y: 0.0

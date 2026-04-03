@@ -4,9 +4,9 @@ track_link:
     rotation: [0.0, 0.0, 0.0, 1.0]
 pre_grasp_pt_1:
   world:
-    translation: [-0.007883, 0.071004, 0.02]
-    rotation: [0.0, 0.0, 0.0, 1.0]
+    translation: [-0.007883, 0.071004, 0.05]
+    rotation: [-0.707, -0.707, 0.0, 0.0]
 grasp_pt_1:
   world:
     translation: [-0.007883, 0.071004, 0]
-    rotation: [0.0, 0.0, 0.0, 1.0]
+    rotation: [-0.707, -0.707, 0.0, 0.0]
