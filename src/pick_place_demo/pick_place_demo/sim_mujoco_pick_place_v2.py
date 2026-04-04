@@ -88,7 +88,7 @@ class PickPlaceSim(Node, BaseViewer):
         torque = None
         if joint_value > 0.03:
             # for open
-            torque = 200
+            torque = 100
         else:
             # for close
             torque = 0

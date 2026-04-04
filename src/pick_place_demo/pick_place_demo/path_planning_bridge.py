@@ -1,9 +1,8 @@
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import Pose, Point
+from geometry_msgs.msg import Pose
 from std_msgs.msg import String
 import json
-from typing import List, Union
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
 
@@ -44,23 +43,26 @@ class PathPlanningTestNode(Node):
         target_state_conf = params['target_state']
         pose_conf:dict = target_state_conf.get('pose', None)
         if pose_conf:
-            base_frame = pose_conf['base_frame']
-            target_frame = pose_conf['target_frame']
-            transform = self.get_transform(target_frame, base_frame)
-            pose:Pose = self.convert_transform_to_pose(transform)
+            target_frame = pose_conf.get('target_frame', None)
+            if target_frame:
+                base_frame = pose_conf['base_frame']
+                # 将target_frame转换成实际pose
+                transform = self.get_transform(target_frame, base_frame)
+                pose:Pose = self.convert_transform_to_pose(transform)
 
-            pose_conf.pop('target_frame')
-            pose_conf["position"] = {
-                "x": pose.position.x,
-                "y": pose.position.y,
-                "z": pose.position.z
-            }
-            pose_conf["orientation"] = {
-                "x": pose.orientation.x,
-                "y": pose.orientation.y,
-                "z": pose.orientation.z,
-                "w": pose.orientation.w
-            }
+                # 将pose添加到参数中
+                pose_conf.pop('target_frame')
+                pose_conf["position"] = {
+                    "x": pose.position.x,
+                    "y": pose.position.y,
+                    "z": pose.position.z
+                }
+                pose_conf["orientation"] = {
+                    "x": pose.orientation.x,
+                    "y": pose.orientation.y,
+                    "z": pose.orientation.z,
+                    "w": pose.orientation.w
+                }
 
         self.publish_cmd(params, self.path_planning_cmd_publisher)
 
