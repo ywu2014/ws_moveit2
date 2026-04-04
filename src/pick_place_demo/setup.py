@@ -59,6 +59,7 @@ setup(
             'path_planning = pick_place_demo.path_planning_moveitpy_v2:main',
             'static_tf_publish = pick_place_demo.static_tf_publish:main',
             'sim_mujoco_pick_place_v2 = pick_place_demo.sim_mujoco_pick_place_v2:main',
+            'path_planning_bridge = pick_place_demo.path_planning_bridge:main',
         ],
     },
 )
