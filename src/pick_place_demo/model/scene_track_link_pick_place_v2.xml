@@ -1,0 +1,61 @@
+<mujoco model="panda scene">
+  <include file="panda.xml"/>
+
+  <statistic center="0.3 0 0.4" extent="1"/>
+
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0"/>
+    <rgba haze="0.15 0.25 0.35 1"/>
+    <global azimuth="120" elevation="-20"/>
+  </visual>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072"/>
+    <texture type="2d" name="groundplane" builtin="checker" mark="edge" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" markrgb="0.8 0.8 0.8" width="300" height="300"/>
+    <material name="groundplane" texture="groundplane" texuniform="true" texrepeat="5 5" reflectance="0.2"/>
+
+    <mesh name="track_link" file="track_link.stl"/>
+    <mesh name="track_link_0" file="track_link_0.stl"/>
+    <mesh name="track_link_1" file="track_link_1.stl"/>
+    <mesh name="track_link_2" file="track_link_2.stl"/>
+    <mesh name="track_link_3" file="track_link_3.stl"/>
+    <mesh name="track_link_4" file="track_link_4.stl"/>
+    <mesh name="track_link_5" file="track_link_5.stl"/>
+    <mesh name="track_link_6" file="track_link_6.stl"/>
+    <mesh name="track_link_7" file="track_link_7.stl"/>
+    <mesh name="track_link_8" file="track_link_8.stl"/>
+    <mesh name="track_link_9" file="track_link_9.stl"/>
+    <mesh name="track_link_10" file="track_link_10.stl"/>
+    <mesh name="track_link_11" file="track_link_11.stl"/>
+    <mesh name="track_link_12" file="track_link_12.stl"/>
+    <mesh name="track_link_13" file="track_link_13.stl"/>
+    <mesh name="track_link_14" file="track_link_14.stl"/>
+    <mesh name="track_link_15" file="track_link_15.stl"/>
+  </asset>
+
+  <worldbody>
+    <light pos="0 0 1.5" dir="0 0 -1" directional="true"/>
+    <geom name="floor" size="0 0 0.05" type="plane" material="groundplane"/>
+
+    <body name="track_link" pos="0.5 0.0 0.02" quat="1 0 0 1">
+      <freejoint name="track_link"/>
+      <geom mesh="track_link" class="visual"/>
+      <geom mesh="track_link_0" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_1" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_2" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_3" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_4" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_5" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_6" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_7" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_8" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_9" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_10" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_11" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_12" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_13" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_14" class="collision" condim="3" friction="1 0.1 0.1"/>
+      <geom mesh="track_link_15" class="collision" condim="3" friction="1 0.1 0.1"/>
+    </body>
+  </worldbody>
+</mujoco>

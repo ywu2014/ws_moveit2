@@ -33,7 +33,7 @@ ros2 topic pub --once /path_planning_bridge_cmd std_msgs/msg/String 'data: "{\"b
 
 ### 移动到放置位置
 ```bash
-ros2 topic pub --once /path_planning_bridge_cmd std_msgs/msg/String 'data: "{\"bridge_type\":\"path_planning\",\"params\":{\"planning_group\":\"arm\",\"target_state\":{\"pose\":{\"position\":{\"x\":0.0,\"y\":0.3,\"z\":0.4},\"orientation\":{\"x\":1.0,\"y\":0.0,\"z\":0.0,\"w\":0.0},\"base_frame\":\"world\",\"end_link\":\"panda_hand_tcp\"}},\"cartesian\":{\"max_step\":0.01,\"jump_threshold\":0.0,\"avoid_collisions\":true},\"execute_trajectory\":true}}"'
+ros2 topic pub --once /path_planning_bridge_cmd std_msgs/msg/String 'data: "{\"bridge_type\":\"path_planning\",\"params\":{\"planning_group\":\"arm\",\"target_state\":{\"pose\":{\"position\":{\"x\":0.0,\"y\":0.3,\"z\":0.4},\"orientation\":{\"x\":1.0,\"y\":0.0,\"z\":0.0,\"w\":0.0},\"base_frame\":\"world\",\"end_link\":\"panda_hand_tcp\"}},\"execute_trajectory\":true}}"'
 ```
 
 ### 打开夹爪
